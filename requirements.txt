@@ -1,0 +1,12 @@
+streamlit
+flask
+langchain
+langchain-community
+langchain-groq
+chromadb
+sentence-transformers
+pypdf
+python-dotenv
+twilio
+requests
+gunicorn
