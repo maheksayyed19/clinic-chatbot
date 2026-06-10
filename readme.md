@@ -1,59 +1,73 @@
-Sunshine Clinic AI Chatbot
-RAG-based AI assistant for clinic patients.
-Works on Website (Streamlit) and WhatsApp (Twilio).
-Uses Groq (free LLM) + HuggingFace embeddings (free) + ChromaDB (local).
+🏥 AI Clinic Chatbot
+An AI-powered chatbot that answers patient queries 24/7 — trained on your clinic's own data. No hallucinations. Works on website and WhatsApp. Supports Hindi and English.
 
-STEP 1 — Get free API keys
+🔴 Live Demo
+👉 Try the bot here - https://clinic-chatbot-j2xd.onrender.com
 
-Groq:        https://console.groq.com  → Create API key
-HuggingFace: https://huggingface.co    → Settings → Tokens
-Twilio:      https://twilio.com        → Free trial (WhatsApp sandbox)
+Ask it anything: timings, doctors, fees, appointments — in Hindi or English.
 
-STEP 2 — Setup
-bashgit clone <your-repo>
+
+✨ Features
+
+RAG-based — only answers from verified clinic documents, zero hallucinations
+Bilingual — Hindi and English supported
+Website chatbot — embeddable on any website with one line of code
+WhatsApp bot — patients can message directly on WhatsApp
+Quick reply buttons — one-tap answers for common questions
+Free stack — Groq LLM + HuggingFace embeddings + ChromaDB
+
+
+🏢 Works for any business
+BusinessUse case🏥 Clinics & hospitalsTimings, doctors, fees, appointments🍽️ RestaurantsMenu, timings, reservations, delivery🏠 Real estate agenciesProperty listings, pricing, availability📊 CA firmsITR deadlines, documents, fees🎓 Coaching classesCourses, fees, schedules, admissions
+
+🛠️ Tech Stack
+LayerToolCostLLMGroq (Llama 3.3)FreeEmbeddingsHuggingFace all-MiniLM-L6-v2FreeVector DBChromaDBFreeWebsite UIStreamlitFreeWhatsAppTwilio SandboxFree (testing)
+
+🚀 Run locally in 5 steps
+1. Clone the repo
+bashgit clone https://github.com/maheksayyed19/clinic-chatbot.git
 cd clinic-chatbot
-pip install -r requirements.txt
-cp .env.example .env
-# Fill in your keys in .env
-STEP 3 — Add your clinic PDF
-Put your clinic FAQ PDF at: data/clinic_faq.pdf
-STEP 4 — Build vector database (run ONCE)
+2. Install dependencies
+bashpip install -r requirements.txt
+3. Add your API keys — create a .env file
+GROQ_API_KEY=your_groq_key
+HF_TOKEN=your_huggingface_token
+TWILIO_ACCOUNT_SID=your_twilio_sid
+TWILIO_AUTH_TOKEN=your_twilio_token
+TWILIO_WHATSAPP_NUMBER=whatsapp:+14155238886
+Get free keys at: Groq • HuggingFace • Twilio
+4. Add your data and build vector DB
+Put your PDF at data/clinic_faq.pdf then run:
 bashpython ingest.py
-This creates a chroma_db/ folder. Run again only if you update the PDF.
-STEP 5A — Run website bot locally
+5. Run the website bot
 bashstreamlit run website_bot.py
 Opens at http://localhost:8501
-STEP 5B — Run WhatsApp bot locally
-Terminal 1:
-bashpython whatsapp_bot.py
-Terminal 2 (install ngrok from https://ngrok.com/download):
-bashngrok http 5000
-Copy the https URL from ngrok (e.g. https://abc123.ngrok.io)
-Go to Twilio Console → WhatsApp Sandbox → set webhook to:
-https://abc123.ngrok.io/whatsapp
-Then WhatsApp the Twilio sandbox number to test.
-STEP 6 — Deploy website bot free on Streamlit Cloud
 
-Push this folder to GitHub (public repo)
-Go to https://share.streamlit.io
-Connect repo, set main file as website_bot.py
-Under Secrets, add:
-GROQ_API_KEY = "gsk_..."
-HF_TOKEN = "hf_..."
-Deploy. Live URL in 3 minutes.
+📱 WhatsApp bot setup
+bash# Terminal 1
+python whatsapp_bot.py
 
-STEP 7 — Deploy WhatsApp bot free on Render
+# Terminal 2
+ngrok http 5000
+Paste the ngrok URL into Twilio Console → WhatsApp Sandbox → Webhook:
+https://your-ngrok-url.ngrok.io/whatsapp
 
-Push to GitHub
-Go to https://render.com → New Web Service
-Connect repo
-Set Start Command: gunicorn whatsapp_bot:app
-Add all env variables from .env
-Deploy. Use the Render URL as your Twilio webhook.
+☁️ Free deployment
+Website bot → Streamlit Cloud
+
+Push repo to GitHub
+Go to share.streamlit.io → connect repo
+Add secrets: GROQ_API_KEY and HF_TOKEN
+Deploy — live URL in 3 minutes
+
+WhatsApp bot → Render
+
+Go to render.com → New Web Service
+Connect repo → Start command: gunicorn whatsapp_bot:app
+Add all env variables → Deploy
 
 
-Test questions
-
+💬 Test questions
 What are the clinic timings?
 Which doctors are available on Monday?
 How much is a cardiologist consultation?
@@ -61,3 +75,11 @@ How do I book an appointment?
 Is the clinic open on Sunday?
 क्लिनिक का समय क्या है?
 डॉक्टर की फीस कितनी है?
+
+📞 Want this for your business?
+I build custom AI chatbots for local businesses in India — trained on your data, deployed in one week.
+Mahek Sayyed — AI Developer, Solapur
+• LinkedIn - https://www.linkedin.com/in/mahek-sayyed-ba0717387/ 
+• Email - maheksayyed803@gmail.com
+
+⭐ Star this repo if you found it useful!
